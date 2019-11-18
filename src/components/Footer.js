@@ -32,7 +32,7 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-            <p className="copyright text-muted">Copyright &copy; HBY 2019</p>
+            <p className="copyright text-muted">Copyright &copy; HBY</p>
           </div>
         </div>
       </div>
