@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Main() {
-  const [posts, setPosts] = useState(null);
-  const url = "http://localhost:3000/api/post";
-  const getPosts = async () => {
-    const { data } = await axios.get(url);
-    setPosts(data.posts);
-  };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
+export default function Main({ posts, getNextPage }) {
   return (
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-8 col-md-10 mx-auto">
           {posts &&
             posts.map(post => (
               <div className="post-preview">
-                <a href="post.html">
+                <Link to={`/post/${post._id}`}>
                   <h2 className="post-title">{post.title}</h2>
-                </a>
+                </Link>
                 <p className="post-meta">{post.date}</p>
               </div>
             ))}
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">
+          <div className="clearfix">
+            <button
+              type="button"
+              className="btn btn-primary float-right"
+              onClick={() => {
+                getNextPage();
+              }}
+            >
               Older Posts &rarr;
-            </a>
+            </button>
           </div>
         </div>
       </div>
