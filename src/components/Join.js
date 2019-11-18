@@ -16,12 +16,44 @@ export default function Join() {
     setIsEmailChecked(data.result);
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!isEmailChecked || isEmailChecked === "yet") {
+      alert("Please Email Duplicate Check");
+      return;
+    }
+    if (!isPasswordSame) {
+      alert("Please Password Check");
+      return;
+    }
+    if (!e.target.name.value || !email || !password) {
+      alert("All field is required");
+      return;
+    }
+    const { data } = await axios.post(`${baseURL}/auth/join`, {
+      name: e.target.name.value,
+      email,
+      password
+    });
+    if (data.result) {
+      setJoinResult(true);
+    } else {
+      alert("Sign Up failed, please call admin");
+    }
+  };
+
   return (
     <>
-      <form>
+      {joinResult && <Redirect to="/login" />}
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Alias</label>
-          <input type="text" className="form-control" placeholder="username" />
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            placeholder="username"
+          />
         </div>
         <div className="form-group">
           <label>Email Address</label>
