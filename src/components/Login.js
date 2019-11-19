@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { baseURL } from "../config";
+import { baseURL } from "../common/config";
 
 export default function Login({ setIsLoggedIn, setIsAdmin, history }) {
   const [loginState, setLoginState] = useState("init");
   const handleSubmit = async e => {
     e.preventDefault();
-    const { data } = await Axios.post(`${baseURL}/auth/login`, {
+    const { data } = await axios.post(`${baseURL}/auth/login`, {
       email: e.target.email.value,
       password: e.target.password.value
     });

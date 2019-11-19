@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { baseURL } from "../config";
+import { baseURL } from "../common/config";
 
 export default function Join() {
   const [email, setEmail] = useState("");
