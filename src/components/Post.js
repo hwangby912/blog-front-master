@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { baseURL } from "../config";
+import { baseURL } from "../common/config";
 
 export default function Post({ match }) {
   const [post, setPost] = useState(null);
