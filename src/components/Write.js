@@ -13,20 +13,19 @@ export default function Write({ history }) {
 
   const addTag = async () => {
     const res = await axios.get(`${baseURL}/api/tag/${tag}`);
+    // 넣고자 하는 tag가 없는 경우
     if (res.data.error) {
-      // 넣고자 하는 tag가 없는 경우
       const { data } = await axios.post(`${baseURL}/api/tag`, {
         name: tag
       });
       setTags([...tags, data.tag]);
-      setTags("");
+      setTag("");
     } else {
       // 넣고자 하는 tag가 있는 경우
       setTags([...tags, res.data.tag]);
       setTag("");
     }
   };
-
   const deleteTag = i => {
     const newTags = [...tags];
     newTags.splice(i, 1);
@@ -40,7 +39,9 @@ export default function Write({ history }) {
       tags: tags.map(t => t._id)
     });
     if (data.result) history.push("/");
-    else alert("Your article is not registered. Please call admin");
+    else {
+      alert("Your article is not registered. Please call admin");
+    }
   };
 
   return (
