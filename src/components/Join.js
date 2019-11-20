@@ -19,15 +19,15 @@ export default function Join() {
   const handleSubmit = async e => {
     e.preventDefault();
     if (!isEmailChecked || isEmailChecked === "yet") {
-      alert("Please Email Duplicate Check");
+      alert("Please dupliacte email check!");
       return;
     }
     if (!isPasswordSame) {
-      alert("Please Password Check");
+      alert("Check password");
       return;
     }
     if (!e.target.name.value || !email || !password) {
-      alert("All field is required");
+      alert("All field is required!");
       return;
     }
     const { data } = await axios.post(`${baseURL}/auth/join`, {
@@ -38,7 +38,7 @@ export default function Join() {
     if (data.result) {
       setJoinResult(true);
     } else {
-      alert("Sign Up failed, please call admin");
+      alert("Join failed please call admin");
     }
   };
 
@@ -47,7 +47,7 @@ export default function Join() {
       {joinResult && <Redirect to="/login" />}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Alias</label>
+          <label>Username</label>
           <input
             type="text"
             name="name"
@@ -72,14 +72,14 @@ export default function Join() {
             className="btn btn-secondary"
             onClick={checkEmail}
           >
-            Email Duplicate Check
+            Email Duplicate Address
           </button>
           <small>
             {isEmailChecked === "yet"
-              ? "duplicate check"
+              ? "please duplicate check"
               : isEmailChecked
-              ? "Email Address Available"
-              : "Email Address Not Available"}
+              ? "It is available"
+              : "It is not available"}
           </small>
         </div>
         <div className="form-group">
@@ -108,7 +108,9 @@ export default function Join() {
             }}
           />
         </div>
-        <small>{isPasswordSame ? "Password Same" : "Password Not Same"}</small>
+        <small>
+          {isPasswordSame ? "Password Correct!" : "Password Not Correct"}
+        </small>
 
         <button type="submit" className="btn btn-primary">
           Submit
